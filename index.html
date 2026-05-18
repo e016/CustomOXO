@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Customizable Tic-Tac-Toe/Noughts and Crosses variants!"
+    />
+    <meta name="google" content="nopagereadaloud" />
+    <title>CustomOXO</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="index.js"></script>
+  </head>
+
+  <body id="body" onload="init()" lang="en">
+    <div id="app">
+      <div id="bParent">
+        <div id="board"></div>
+        <button class="button" onclick="game.init(true)" id="makegame">
+          Reset Game
+        </button>
+      </div>
+      <div class="turn">
+        <span id="turn">turn: X<br /></span>
+        <span id="win"></span>
+        <span id="pointC">
+          X: 0<br />
+          O: 0<br />
+          △: 0<br />
+          □: 0<br />
+          ¶: 0<br /><br
+        /></span>
+      </div>
+      <div>
+        <div class="options-container">
+          <div id="arrow" onclick="game.bridge.toggleOptions()">
+            <span>&rarr;</span>
+          </div>
+          <div class="options" id="options">
+            <label
+              >Width:<input
+                id="width"
+                type="number"
+                min="2"
+                value="3"
+                max="15"
+                onchange="game.init()"
+            /></label>
+            <br />
+            <label
+              >Height:<input
+                id="height"
+                type="number"
+                min="2"
+                value="3"
+                max="15"
+                onchange="game.init()"
+            /></label>
+            <br />
+            <label
+              ><input
+                id="times"
+                type="number"
+                min="2"
+                value="3"
+                max="15"
+                onchange="game.init()"
+              />-in-a-row</label
+            >
+            <br />
+
+            <label
+              ><input
+                id="c4style"
+                type="checkbox"
+                onchange="game.init()"
+              />Connect 4 Style</label
+            ><br />
+
+            <label
+              ><input
+                id="points"
+                type="checkbox"
+                onchange="game.init()"
+              />Points system</label
+            ><br /><br />
+
+            <p class="t">Turns</p>
+            <label
+              ><input
+                type="radio"
+                name="turns"
+                id="td"
+                onchange="game.init()"
+                checked="checked"
+              />Default</label
+            ><br />
+            <div id="noNokato">
+              <label
+                ><input
+                  id="wild"
+                  type="radio"
+                  name="turns"
+                  onchange="game.init()"
+                  value="true"
+                />Wild</label
+              ><br />
+              <label
+                ><input
+                  id="rTurn"
+                  type="radio"
+                  name="turns"
+                  onchange="game.init()"
+                />Random Turn</label
+              >
+            </div>
+            <br />
+            <p class="t">Players</p>
+            <label
+              ><input
+                id="nokato"
+                type="checkbox"
+                name="players"
+                onchange="game.bridge.setNokato(this.checked)"
+              />Nokato</label
+            ><br />
+            <label
+              ><input
+                id="p2"
+                type="radio"
+                name="players"
+                onchange="game.changePlayers(2)"
+                checked="checked"
+              />2 Players</label
+            ><br />
+            <div id="p">
+              <label
+                ><input
+                  id="p3"
+                  type="radio"
+                  name="players"
+                  onchange="game.changePlayers(3)"
+                />3 Players</label
+              ><br />
+              <label
+                ><input
+                  id="p4"
+                  type="radio"
+                  name="players"
+                  onchange="game.changePlayers(4)"
+                />4 Players</label
+              ><br />
+              <label
+                ><input
+                  id="p5"
+                  type="radio"
+                  name="players"
+                  onchange="game.changePlayers(5)"
+                />5 Players</label
+              ><br />
+            </div>
+            <br />
+            <p class="t">Extras</p>
+            <button
+              class="button"
+              id="empties"
+              onclick="game.bridge.toggleEmpties(this)"
+            >
+              Set Empties</button
+            ><br />
+            <select name="mode" id="mode" onchange="game.bridge.setExtraMode()">
+              <option value="default">Default</option>
+              <!-- <option value="quixo">Quixo</option> -->
+              <option value="sos">SOS (form "OXO")</option>
+            </select>
+            <br />
+            <p class="t">Templates</p>
+            <select name="preset" id="preset" onchange="game.bridge.setPreset()">
+              <option value="" selected hidden>Choose Template...</option>
+              <option value="o">Original</option>
+              <option value="four">4x4</option>
+              <option value="five">5x5 (4 in row)</option>
+              <option value="pyra">Pyramid</option>
+              <option value="n">Nokato</option>
+              <option value="tr">Treblecross</option>
+              <option value="c4">Connect 4</option>
+              <option value="ttf">Tic-Tac-Fun!</option>
+              <option value="allSmiles">All Smiles</option>
+              <option value="battle">Battlefield</option>
+            </select>
+            <br />
+
+            <button
+              class="button"
+              id="import"
+              onclick="game.importBoard(prompt('Board Code:'))"
+            >
+              Import
+            </button>
+            <button class="button" id="export" onclick="game.exportBoard()">
+              Export
+            </button>
+          </div>
+          <noscript class="noscript">
+            <p>CustomOXO requires JavaScript in order to function properly. <br/> Please enable JavaScript to use CustomOXO</p>
+          </noscript>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

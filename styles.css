@@ -1,0 +1,253 @@
+#app {
+  --background-color: #eee;
+  --settings-color: darkgrey;
+  --settings-outline: grey;
+
+  --tile-scale: 52px;
+  --tile-border: calc(var(--tile-scale) * 0.04);
+  --tile-radius: calc(var(--tile-scale) * 0.2);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+
+  height: 100vh;
+  overflow: clip;
+  background: var(--background-color);
+}
+#bParent {
+  justify-content: center;
+  align-items: center;
+  align-self: fill;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  position: relative;
+  --hover-color: rgb(240, 240, 240);
+  --press-color: rgb(200, 200, 200);
+}
+.turn {
+  position: absolute;
+  align-self: flex-start;
+  font-family: monospace;
+  font-size: 1.3em;
+  color: white;
+  padding: 5px;
+  padding-right: 7px;
+  background-color: black;
+  outline: 2px solid #222;
+  border-radius: 0px 0px 9px 0px;
+}
+.t {
+  margin: 5px;
+  font-size: 125%;
+  font-weight: bold;
+}
+#board {
+  display: grid;
+  grid-template-columns: repeat(3, 50px);
+  grid-template-rows: repeat(3, 50px);
+  border-collapse: collapse;
+  background-color: black;
+  border-radius: var(--tile-radius);
+  border: var(--tile-border) solid black;
+  box-shadow: 0px 0px 20px 8px white;
+}
+
+#msg1 {
+  color: pink;
+  user-select: none;
+  display: none;
+  padding: 5px;
+  margin: 5px;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.tile {
+  padding: var(--tile-radius);
+  border: var(--tile-border) solid #222;
+  border-radius: var(--tile-radius);
+  font-size: calc(var(--tile-scale) * 0.5);
+  background-color: rgb(250, 250, 250);
+  align-items: center;
+  justify-self: stretch;
+  text-align: center;
+  /* ugh */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin: 1px;
+}
+.active:hover {
+  background-color: var(--hover-color);
+}
+.active:active {
+  background-color: var(--press-color);
+  border-color: #333;
+  box-shadow: 0px 0px 2px 0px white;
+}
+.blank {
+  background-color: #111;
+  border-color: black;
+}
+
+#wildContainer {
+  display: flex;
+  justify-content: center;
+  position: relative !important;
+  top: 9px;
+}
+
+.wildOption {
+  color: white;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: sans-serif;
+}
+
+.noscript noscript {
+  display: initial;
+}
+
+.options-container {
+  display: flex;
+  align-items: center;
+  overflow: auto;
+  height: 100%;
+  overflow: clip;
+  padding-block: 5px;
+}
+#pointC {
+  display: none;
+}
+#arrow {
+  display: flex;
+  align-items: center;
+  color: white;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: var(--settings-outline);
+  border: 2px solid var(--settings-outline);
+  border-right: initial;
+  padding: 5px;
+  height: 50px;
+  border-radius: 15px 0px 0px 15px;
+  cursor: pointer;
+  z-index: 999;
+}
+#arrow:hover {
+  color: var(--settings-outline);
+  background-color: white;
+}
+
+.options {
+  padding: 10px;
+  padding-top: 10px;
+  font-family: monospace;
+  /* padding-bottom: 0px; */
+  outline: 2px solid var(--settings-outline);
+  background: var(--settings-color);
+  background-repeat: repeat;
+  min-height: 100vh;
+  color: black;
+  /* overflow: auto; */
+}
+
+input {
+  accent-color: black;
+}
+#p2 {
+  accent-color: red;
+}
+#p3 {
+  accent-color: green;
+}
+#p4 {
+  accent-color: gold;
+}
+#p5 {
+  accent-color: orchid;
+  color: orchid;
+}
+
+button {
+  padding-block: 2px;
+  margin-block: 2px;
+  background-color: aquamarine;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  color: black; /* Safari, sigh */
+  transition: 0.1s ease;
+  margin-block: 5px;
+  outline: 0px solid rgba(0, 0, 0, 0.2);
+}
+
+#makegame {
+  padding: 10px;
+  position: absolute;
+  bottom: 10px;
+}
+
+button:hover {
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+}
+
+button:active {
+  background-color: rgb(0, 0, 100);
+  color: white;
+  outline-width: 4px;
+}
+
+input[type="number"],
+select {
+  width: 50px;
+  color: white;
+  background-color: black;
+  border: 2px white solid;
+  border-radius: 5px;
+}
+select {
+  width: 130px;
+}
+
+input[type="number"]:focus,
+select:open {
+  outline-width: 0;
+  color: black;
+  background-color: white;
+  border-color: black;
+  accent-color: black;
+}
+.tooltip {
+  position: absolute;
+  padding: 5px;
+  font-size: 14px;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  background: rgb(244, 244, 244);
+  border-radius: 5px;
+  text-shadow: rgba(0, 0, 0, 0.1) 1px 1px 1px;
+  box-shadow: rgba(0, 0, 0, 1) 1px 1px 2px 0px;
+}
+
+.tooltip:after {
+  content: "";
+  position: relative;
+  width: 0;
+  height: 0;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent rgb(244, 244, 244) transparent;
+  bottom: 30px;
+}
