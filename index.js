@@ -44,15 +44,17 @@ Bridge.prototype.setNokato = function (on) {
   this.game.setNokato(on);
 };
 Bridge.prototype.refreshDisplay = function () {
+  this.win.innerHTML = ``;
+  this.turn.style.display = "";
   this.turn.innerHTML = `turn: ${this.game.characters[this.game.turn]}</br>`;
   this.pointC.style.display = this.game.points ? "initial" : "none";
 
   if (this.game.isTie()) {
     if (this.game.points) {
-      var sorted = this.game.playerPoints.slice().sort().reverse();
+      var sorted = this.game.playerPoints.slice().toSorted().toReversed();
       this.turn.style.display = "none";
       if (
-        JSON.stringify(this.game.playerPoints.sort().reverse()) ==
+        JSON.stringify(this.game.playerPoints.toSorted().toReversed()) ==
         JSON.stringify(sorted)
       ) {
         this.win.innerHTML = `Tie!`;
@@ -400,13 +402,14 @@ Game.prototype.isPerfect = function (a) {
 Game.prototype.whoWon = function (IDs) {
   this.win = true;
   this.refreshDisplay();
+  this.playerPoints[this.characters.indexOf(this.getSquare(IDs[0]))] += 1;
+  console.warn(this.playerPoints);
   if (
     this.calculatedIDs.some((e) => JSON.stringify(e) === JSON.stringify(IDs))
   ) {
     return;
   }
   this.calculatedIDs.push(IDs);
-  this.playerPoints[IDs[0]] += 1;
   var color = this.characters.indexOf(this.getSquare(IDs[0]));
   // highlight winner cells
   IDs.forEach((id) => {
