@@ -241,7 +241,7 @@ Bridge.prototype.setPreset = function () {
       ]);
       break;
     case "battle":
-      this.setBoard(10, 10, 3, false, true, "w", 2, [
+      this.game.setBoard(10, 10, 3, false, true, "w", 2, [
         "5_0",
         "4_1",
         "5_2",
