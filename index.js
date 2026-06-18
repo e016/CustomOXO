@@ -8,6 +8,7 @@ function isNil(x) {
 
 function Bridge() {
   this.noNokato = document.getElementById("noNokato");
+  this.nokato = document.getElementById("nokato");
   this.td = document.getElementById("td");
   this.width = document.getElementById("width");
   this.height = document.getElementById("height");
@@ -37,6 +38,7 @@ Bridge.prototype.highlightSquare = function (id, color) {
   document.getElementById(id).style.borderColor = "white";
 };
 Bridge.prototype.setNokato = function (on) {
+  this.nokato.checked = on;
   this.noNokato.style.display = on ? "none" : "";
   if (on) {
     this.td.checked = true;
@@ -195,7 +197,7 @@ Bridge.prototype.setPreset = function () {
       this.game.setBoard(10, 1, 3, false, false, "d", 2, []);
       break;
     case "n":
-      this.game.setBoard(3, 3, 3, false, false, "d", 1, []);
+      this.game.setBoard(3, 3, 3, false, false, "d", 2, [], "", true);
       break;
     case "c4":
       this.game.setBoard(7, 6, 4, true, false, "d", 2, []);
@@ -256,7 +258,7 @@ Bridge.prototype.setPreset = function () {
   }
   setTimeout(function () {
     document.getElementById("preset").value = "";
-  }, 500);
+  }, 1000);
 };
 
 function Game(bridge) {
@@ -350,7 +352,7 @@ Game.prototype.init = function (resetEmpties) {
           `" ></div>`;
       } else {
         tag =
-          `<div class="tile blank" onclick="game.bridge.noEmpties(this)" id="` +
+          `<div class="tile blank" onclick="game.noEmpties(this)" id="` +
           id +
           `" ></div>`;
       }
@@ -612,6 +614,7 @@ Game.prototype.exportBoard = function () {
     this.players,
     this.blanks,
     this.SOS ? "sos" : "",
+    this.nokato || false
   ];
 
   window.navigator.clipboard.writeText(JSON.stringify(board));
@@ -627,7 +630,9 @@ Game.prototype.setBoard = function (
   players,
   empties,
   style,
+  nokato
 ) {
+  this.bridge.setNokato(nokato);
   this.bridge.setExtraMode(style);
   this.bridge.win.innerText = "";
   this.bridge.width.value = Number(width);
@@ -635,6 +640,9 @@ Game.prototype.setBoard = function (
   this.bridge.times.value = +times || 3;
   this.playerPoints = [0, 0, 0, 0, 0];
   this.players = players;
+  for (let i = 2; i < 5; i++) {
+    document.getElementById(`p${i}`).checked = i === players
+  }
   this.bridge.points.checked = points || false;
   this.bridge.c4.checked = c4 || false;
   this.bridge.rTurn.checked = false;
