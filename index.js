@@ -26,6 +26,8 @@ function Bridge() {
   this.attachControls();
 }
 Bridge.prototype.attachControls = function () {
+  const myself = this;
+  
   document.getElementById("makegame").onclick = () => this.game.init(true);
   document.getElementById("arrow").onclick = () => this.game.bridge.toggleOptions();
   [
@@ -38,6 +40,20 @@ Bridge.prototype.attachControls = function () {
     this.wild,
     this.rTurn,
   ].forEach((elem) => elem.onchange = () => this.game.init());
+
+  for (let i = 1; i++; i < 5) {
+    if (i > 5) {
+      break;
+    }
+    document.getElementById(`p${i}`).onchange = () => this.game.changePlayers(i);
+  };
+
+  document.getElementById("nokato").onchange = function () {
+    myself.setNokato(this.checked)
+  };
+  document.getElementById("empties").onclick = function () {
+    myself.toggleEmpties(this)
+  };
   document.getElementById("preset").onchange = () => this.setPreset();
   document.getElementById("mode").onchange = () => this.setExtraMode();
   document.getElementById("import").onclick = () => this.game.importBoard(prompt('Board Code:'));
