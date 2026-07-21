@@ -18,7 +18,7 @@
     <div id="app">
       <div id="bParent">
         <div id="board"></div>
-        <button class="button" onclick="game.init(true)" id="makegame">
+        <button class="button" id="makegame">
           Reset Game
         </button>
       </div>
@@ -35,7 +35,7 @@
       </div>
       <div>
         <div class="options-container">
-          <div id="arrow" onclick="game.bridge.toggleOptions()">
+          <div id="arrow">
             <span>&rarr;</span>
           </div>
           <div class="options" id="options">
@@ -46,7 +46,6 @@
                 min="2"
                 value="3"
                 max="15"
-                onchange="game.init()"
             /></label>
             <br />
             <label
@@ -56,7 +55,6 @@
                 min="2"
                 value="3"
                 max="15"
-                onchange="game.init()"
             /></label>
             <br />
             <label
@@ -66,7 +64,6 @@
                 min="2"
                 value="3"
                 max="15"
-                onchange="game.init()"
               />-in-a-row</label
             >
             <br />
@@ -75,7 +72,6 @@
               ><input
                 id="c4style"
                 type="checkbox"
-                onchange="game.init()"
               />Connect 4 Style</label
             ><br />
 
@@ -83,7 +79,6 @@
               ><input
                 id="points"
                 type="checkbox"
-                onchange="game.init()"
               />Points system</label
             ><br /><br />
 
@@ -93,7 +88,6 @@
                 type="radio"
                 name="turns"
                 id="td"
-                onchange="game.init()"
                 checked="checked"
               />Default</label
             ><br />
@@ -103,7 +97,6 @@
                   id="wild"
                   type="radio"
                   name="turns"
-                  onchange="game.init()"
                   value="true"
                 />Wild</label
               ><br />
@@ -112,7 +105,6 @@
                   id="rTurn"
                   type="radio"
                   name="turns"
-                  onchange="game.init()"
                 />Random Turn</label
               >
             </div>
@@ -170,14 +162,14 @@
             >
               Set Empties</button
             ><br />
-            <select name="mode" id="mode" onchange="game.bridge.setExtraMode()">
+            <select name="mode" id="mode">
               <option value="default">Default</option>
               <!-- <option value="quixo">Quixo</option> -->
               <option value="sos">SOS (form "OXO")</option>
             </select>
             <br />
             <p class="t">Templates</p>
-            <select name="preset" id="preset" onchange="game.bridge.setPreset()">
+            <select name="preset" id="preset">
               <option value="" selected hidden>Choose Template...</option>
               <option value="o">Original</option>
               <option value="four">4x4</option>
@@ -195,11 +187,10 @@
             <button
               class="button"
               id="import"
-              onclick="game.importBoard(prompt('Board Code:'))"
             >
               Import
             </button>
-            <button class="button" id="export" onclick="game.exportBoard()">
+            <button class="button" id="export">
               Export
             </button>
             <br/><br/>

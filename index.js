@@ -7,20 +7,41 @@ function isNil(x) {
 }
 
 function Bridge() {
-  this.noNokato = document.getElementById("noNokato");
-  this.nokato = document.getElementById("nokato");
-  this.td = document.getElementById("td");
   this.width = document.getElementById("width");
   this.height = document.getElementById("height");
   this.times = document.getElementById("times");
-  this.c4 = document.getElementById("c4style");
   this.points = document.getElementById("points");
+  this.c4 = document.getElementById("c4style");
+
+  this.td = document.getElementById("td");
   this.rTurn = document.getElementById("rTurn");
   this.wild = document.getElementById("wild");
+
+  this.noNokato = document.getElementById("noNokato");
+  this.nokato = document.getElementById("nokato");
   this.pointC = document.getElementById("pointC");
   this.win = document.getElementById("win");
   this.turn = document.getElementById("turn");
   this.board = document.getElementById("board");
+  this.attachControls();
+}
+Bridge.prototype.attachControls = function () {
+  document.getElementById("makegame").onclick = () => this.game.init(true);
+  document.getElementById("arrow").onclick = () => this.game.bridge.toggleOptions();
+  [
+    this.width,
+    this.height,
+    this.times,
+    this.c4,
+    this.points,
+    this.td,
+    this.wild,
+    this.rTurn,
+  ].forEach((elem) => elem.onchange = () => this.game.init());
+  document.getElementById("preset").onchange = () => this.setPreset();
+  document.getElementById("mode").onchange = () => this.setExtraMode();
+  document.getElementById("import").onclick = () => this.game.importBoard(prompt('Board Code:'));
+  document.getElementById("export").onclick = () => this.game.exportBoard();
 }
 Bridge.prototype.getSquare = function (x, y) {
   // accepts either xy coordinates or one parameter for an id
